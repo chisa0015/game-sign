@@ -1,0 +1,59 @@
+{
+  "_说明": "复制本文件为 config.json 并填自己的凭据。accounts 里每一项是一个账号。",
+  "accounts": [
+    {
+      "type": "mihoyo",
+      "name": "米游社主号",
+      "cookie": "ltuid_v2=你的; ltoken_v2=你的; ltuid=你的; ltoken=你的",
+      "uid": "100000000",
+      "region": "cn_gf01",
+      "games": [
+        "genshin",
+        "starrail",
+        "zzz",
+        "honkai3"
+      ]
+    },
+    {
+      "type": "mihoyo",
+      "name": "米游社小号",
+      "cookie": "ltuid_v2=你的; ltoken_v2=你的",
+      "uid_genshin": "200000000",
+      "uid_starrail": "300000000",
+      "region_genshin": "cn_gf01",
+      "region_starrail": "prod_gf_cn",
+      "games": [
+        "genshin",
+        "starrail"
+      ]
+    },
+    {
+      "type": "kuro",
+      "name": "鸣潮号",
+      "userId": "你的库街区 userId",
+      "token": "你的库街区 token",
+      "games": [
+        "wuthering",
+        "pgr"
+      ]
+    },
+    {
+      "type": "skland",
+      "name": "森空岛（明日方舟）",
+      "cred": "你的森空岛 cred",
+      "games": [
+        "arknights",
+        "exastris",
+        "endfield"
+      ]
+    },
+    {
+      "type": "tajiduo",
+      "name": "塔吉多（异环）",
+      "refreshToken": "你的塔吉多 refreshToken",
+      "games": [
+        "nte"
+      ]
+    }
+  ]
+}
