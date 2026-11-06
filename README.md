@@ -247,6 +247,31 @@ crontab -e
 }
 ```
 
+## 接口验证状态
+
+用**无效凭据**实测各接口连通性（能返回结构化 JSON = 接口地址正确）：
+
+| 平台 | 接口 | 实测返回 | 状态 |
+|---|---|---|---|
+| 米游社 | 原神 `/event/luna/sign` | `retcode=-100 请从游戏内打开参与活动` | ✅ 接口活 |
+| 米游社 | 崩铁 | `retcode=-100 请登录后重试` | ✅ 接口活 |
+| 米游社 | 绝区零 | `retcode=-100` | ✅ 接口活 |
+| 库街区 | 鸣潮 `/encourage/signIn/v2` | `code=220 登录已过期` | ✅ 接口活 |
+| 森空岛 | 明日方舟 `/api/v1/game/attendance` | `code=10002 用户未登录` | ✅ 接口活 |
+| 塔吉多 | `/usercenter/api/refreshToken` | `code=22 invalid request` | ⚠️ **缺 header** |
+
+**说明**：
+
+- 前 5 个接口**地址和协议已验证正确**，只要有真凭据就能签
+- **森空岛**原来的 `/api/v0/` 是错的（404），已修正为 `/api/v1/`
+- **塔吉多**接口存在但返回 `code=22 invalid request`，推测需要额外 header（`platform` / `appVersion` / `deviceid`），**尚未完全打通**
+
+**自己验证**：
+
+```bash
+python verify_api.py     # 用无效凭据测各接口
+```
+
 ## 已知限制
 
 - **米游社的 DS 签名**：部分接口需要 `DS` 头（`salt` + `t` + `r` 的 MD5），本脚本用的是不需要 DS 的老接口，如果哪天失效需要补上签名逻辑

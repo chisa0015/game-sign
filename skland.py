@@ -70,7 +70,7 @@ def skland_checkin(cred, game_id):
     签到单个游戏
     返回：{"code":0,"message":"OK","data":{...}}
     """
-    path = "/api/v0/game/attendance"
+    path = "/api/v1/game/attendance"
     url = "https://zonai.skland.com" + path
     body_str = json.dumps({"gameId": int(game_id)}, separators=(",", ":"))
     headers = skland_headers(cred, path, body_str)
@@ -95,7 +95,7 @@ def skland_checkin(cred, game_id):
 
 def skland_player_info(cred):
     """拿绑定的玩家信息（含各个游戏的 uid / 昵称）"""
-    path = "/api/v0/game/player/info"
+    path = "/api/v1/game/player/info"
     url = "https://zonai.skland.com" + path
     body_str = ""
     headers = skland_headers(cred, path, body_str)
@@ -130,7 +130,8 @@ def run_skland_account(acc, dry_run=False):
             results.append({"game": g["name"], "ok": True, "msg": "签到成功"})
         elif "已签" in str(msg) or "already" in str(msg).lower() or code == 10001:
             results.append({"game": g["name"], "ok": True, "msg": "今天已经签过了"})
-        elif "cred" in str(msg).lower() or "登录" in str(msg) or code == 10002:
+        elif code == 401 or "10002" in str(msg) or "未登录" in str(msg) \
+                or "cred" in str(msg).lower() or "登录" in str(msg):
             results.append({"game": g["name"], "ok": False, "msg": "cred 失效，需重新抓包"})
         else:
             results.append({"game": g["name"], "ok": False, "msg": "%s (code=%s)" % (msg, code)})
